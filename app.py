@@ -1,10 +1,20 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def accueil():
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+
+    print("Visiteur IP :", ip)
+
+    return """
+    <h1>Aimar développeur</h1>
+    <p>Bienvenue sur mon site</p>
+    """
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
 
     return r"""
 <!DOCTYPE html>
